@@ -30,7 +30,6 @@ jobs:
     - name: ENV
       run: |
         env
-    - name: Test with pytest
+    - name: Test with Django
       run: |
-        pip install pytest
-        pytest
+        manage.py test

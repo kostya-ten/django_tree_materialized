@@ -3,7 +3,7 @@ name: Testing
 on: [push]
 
 jobs:
-  build:
+  test:
     name: "Testing code"
     runs-on: ubuntu-latest
     steps:
@@ -19,3 +19,11 @@ jobs:
     - name: Testing with Django
       run: |
         python manage.py test
+
+  build:
+    name: "Build code"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Testing with Django
+        run: |
+          env

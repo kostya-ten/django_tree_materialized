@@ -32,7 +32,7 @@ class TreeMP(models.Model):
 
     # Create node
     @classmethod
-    def create(cls, parent=None, **kwargs) -> 'self':
+    def create(cls, parent=None, **kwargs):
 
         obj = cls.objects.create(**kwargs)
         obj.level = 1

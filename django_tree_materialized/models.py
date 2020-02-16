@@ -43,3 +43,7 @@ class TreeMP(models.Model):
 
         obj.save()
         return obj
+
+    @classmethod
+    def delete(cls, obj: int) -> None:
+        cls.objects.filter(id=obj).delete()

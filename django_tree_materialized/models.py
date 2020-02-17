@@ -8,7 +8,7 @@ class TreeMP(models.Model):
     path = models.CharField(null=True, max_length=1024)
 
     @classmethod
-    def number_to_str(cls, num):
+    def number_to_str(cls, num: int):
         tree_mp_steplen = getattr(settings, 'TREE_MP_STEPLEN', 6)
         chars = "0123456789abcdefghijklmnopqrstuvwxyz"
 
@@ -20,7 +20,7 @@ class TreeMP(models.Model):
         return str(s).rjust(tree_mp_steplen, '0')
 
     @classmethod
-    def str_to_number(cls, num_str):
+    def str_to_number(cls, num_str: str):
         chars = "0123456789abcdefghijklmnopqrstuvwxyz"
         num = 0
         for i, c in enumerate(reversed(num_str)):

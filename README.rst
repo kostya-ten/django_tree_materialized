@@ -2,7 +2,7 @@ Materialized tree for Django 3.x
 ================================
 
 .. image:: https://github.com/kostya-ten/django_tree_materialized/workflows/Workflows/badge.svg
-     :target: https://github.com/kostya-ten/django_tree_materialized/
+     :target: https://github.com/kostya-ten/django_tree_materialized/actions/
      :alt: GihHub Action
 
 .. image:: https://requires.io/github/kostya-ten/django_tree_materialized/requirements.svg?branch=master

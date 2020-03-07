@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.test import TestCase
 
 from django_tree_materialized.exceptions import InvalidMove

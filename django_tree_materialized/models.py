@@ -2,14 +2,14 @@ from django.conf import settings
 from django.db import models
 
 
-class TreeMP(models.Model):
+class MPTree(models.Model):
     parent = models.ForeignKey('self', null=True, on_delete=models.CASCADE)
     level = models.IntegerField(null=True)
     path = models.CharField(null=True, max_length=1024)
 
     @classmethod
     def number_to_str(cls, num):
-        tree_mp_steplen = getattr(settings, 'TREE_MP_STEPLEN', 6)
+        mp_tree_steplen = getattr(settings, 'MPTREE_STEPLEN', 6)
         chars = "0123456789abcdefghijklmnopqrstuvwxyz"
 
         s = ""
@@ -17,7 +17,7 @@ class TreeMP(models.Model):
             s = chars[num % len(chars)] + s
             num //= len(chars)
 
-        return str(s).rjust(tree_mp_steplen, '0')
+        return str(s).rjust(mp_tree_steplen, '0')
 
     @classmethod
     def str_to_number(cls, num_str):
@@ -47,3 +47,53 @@ class TreeMP(models.Model):
     @classmethod
     def delete(cls, obj: int) -> None:
         cls.objects.filter(id=obj).delete()
+
+    def get_family(self, include_self: bool = True) -> models.QuerySet:
+        """
+            Getting a family list
+        """
+        mp_tree_steplen = getattr(settings, 'MPTREE_STEPLEN', 6)
+
+        sql = []
+        for item in [self.path[i:i + mp_tree_steplen] for i in range(0, len(self.path), mp_tree_steplen)]:
+            id_obj = int(item)
+            if include_self:
+                sql.append(id_obj)
+            else:
+                if id_obj != self.id:
+                    sql.append(id_obj)
+
+        return self.__class__.objects.filter(id__in=sql)
+
+    def get_children(self):
+        return self.__class__.objects.filter(path__startswith=self.path)
+
+    def get_parent(self):
+        """
+            Getting a parent
+        """
+        return self.parent
+
+    def get_root(self):
+        mp_tree_steplen = getattr(settings, 'MPTREE_STEPLEN', 6)
+
+        sql = []
+        for item in [self.path[i:i + mp_tree_steplen] for i in range(0, len(self.path), mp_tree_steplen)]:
+            sql.append(int(item))
+
+        return self.__class__.objects.filter(id__in=sql, level=1)[:1].get()
+
+
+        # for i in cls.objects.all():
+        #     print(i.path)
+
+        # print(cls.objects.filter(path__endswith=path).query)
+
+        # self.objects.filter(path__iendswith=path)
+        # return self.__class__.__name__
+
+        #fff = getattr(self, self._meta.object_name)
+
+        #return self._meta.object_name
+
+        # return self._meta.object_name

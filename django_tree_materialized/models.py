@@ -1,5 +1,8 @@
 from django.conf import settings
-from django.db import models
+from django.db import models, transaction
+from django.db.models import Q
+
+from . import exceptions
 
 
 class MPTree(models.Model):
@@ -65,8 +68,11 @@ class MPTree(models.Model):
 
         return self.__class__.objects.filter(id__in=sql)
 
-    def get_children(self):
-        return self.__class__.objects.filter(path__startswith=self.path)
+    def get_children(self, include_self: bool = True):
+        if include_self:
+            return self.__class__.objects.filter(path__startswith=self.path)
+        else:
+            return self.__class__.objects.filter(~Q(id=self.id), Q(path__startswith=self.path))
 
     def get_parent(self):
         """
@@ -85,3 +91,28 @@ class MPTree(models.Model):
             sql.append(int(item))
 
         return self.__class__.objects.filter(id__in=sql, level=1)[:1].get()
+
+    def move(self, obj):
+        mp_tree_steplen = getattr(settings, 'MPTREE_STEPLEN', 6)
+
+        for item in self.get_children():
+            if obj.id == item.id:
+                raise exceptions.InvalidMove("Unable to transfer object")
+
+        with transaction.atomic():
+            for item in self.get_children(include_self=False):
+                item.path = obj.path + item.path
+
+                level = [item.path[i:i + mp_tree_steplen] for i in range(0, len(item.path), mp_tree_steplen)]
+                item.level = len(level)
+                item.save()
+
+            self.parent_id = obj.id
+            self.path = obj.path + self.path
+
+            level = [self.path[i:i + mp_tree_steplen] for i in range(0, len(self.path), mp_tree_steplen)]
+            self.level = len(level)
+
+            self.save()
+
+        return obj

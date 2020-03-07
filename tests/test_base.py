@@ -1,4 +1,6 @@
 from django.test import TestCase
+
+from django_tree_materialized.exceptions import InvalidMove
 from . import models
 
 
@@ -57,4 +59,32 @@ class Tests(TestCase):
         self.assertEqual(res_tree.name, "Name node1")
 
         res_tree = result.filter(name="Name node2").get()
+        self.assertEqual(res_tree.name, "Name node2")
+
+    def test_fail_move(self):
+        tree = models.Tree.create(name="Name node1")
+        tree_sub1 = models.Tree.create(name="Name node2", parent=tree)
+        tree_sub2 = models.Tree.create(name="Name node3", parent=tree_sub1)
+
+        tree_move = models.Tree.create(name="Name node move")
+
+        with self.assertRaises(InvalidMove) as context:
+            tree.move(tree_sub2)
+
+    def test_move(self):
+        tree1 = models.Tree.create(name="Name node1")
+        tree2 = models.Tree.create(name="Name node2")
+
+        tree = tree2.move(tree1)
+        result = tree.get_children()
+        self.assertEqual(result.count(), 2)
+
+        res_tree = result.filter(name="Name node1").get()
+        self.assertEqual(res_tree.path, '000001')
+        self.assertEqual(res_tree.level, 1)
+        self.assertEqual(res_tree.name, "Name node1")
+
+        res_tree = result.filter(name="Name node2").get()
+        self.assertEqual(res_tree.path, '000001000002')
+        self.assertEqual(res_tree.level, 2)
         self.assertEqual(res_tree.name, "Name node2")

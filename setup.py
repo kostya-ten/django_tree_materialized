@@ -47,6 +47,6 @@ setup(
         'Source': 'https://github.com/kostya-ten/django_tree_materialized/',
         'Tracker': 'https://github.com/kostya-ten/django_tree_materialized/issues/',
     },
-    python_requires='~=3.8',
+    python_requires='~=3.6',
     install_requires=required,
 )

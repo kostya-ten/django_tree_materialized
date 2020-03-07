@@ -49,7 +49,7 @@ To enable ``django_tree_materialized`` in your project you need to add it to `IN
     )
 
 
-Use
+Using
 """""
 Add to your ``models.py``
 
@@ -60,6 +60,8 @@ Add to your ``models.py``
     class YouModel(MPTree):
         name = models.CharField(max_length=200)
 
+
+Create node or create child node
 
 .. code-block:: python
     name = models.Tree.create(name="Name name")

@@ -20,7 +20,7 @@ Requirements
 
 Getting It
 """"""""""""""""""
-You can get Django Tasker Exchange Rate by using pip::
+You can get Django tree materialized by using pip::
 
     $ pip install pip install django-tree-materialized
 

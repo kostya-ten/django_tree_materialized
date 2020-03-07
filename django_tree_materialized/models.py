@@ -75,6 +75,9 @@ class MPTree(models.Model):
         return self.parent
 
     def get_root(self):
+        """
+            Getting root object
+        """
         mp_tree_steplen = getattr(settings, 'MPTREE_STEPLEN', 6)
 
         sql = []
@@ -82,18 +85,3 @@ class MPTree(models.Model):
             sql.append(int(item))
 
         return self.__class__.objects.filter(id__in=sql, level=1)[:1].get()
-
-
-        # for i in cls.objects.all():
-        #     print(i.path)
-
-        # print(cls.objects.filter(path__endswith=path).query)
-
-        # self.objects.filter(path__iendswith=path)
-        # return self.__class__.__name__
-
-        #fff = getattr(self, self._meta.object_name)
-
-        #return self._meta.object_name
-
-        # return self._meta.object_name

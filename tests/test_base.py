@@ -2,7 +2,7 @@ from django.test import TestCase
 from . import models
 
 
-class Validators(TestCase):
+class Tests(TestCase):
     def test_number_to_str(self):
         result = models.Tree.number_to_str(1)
         self.assertEqual(result, "000001")

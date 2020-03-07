@@ -59,3 +59,14 @@ Add to your ``models.py``
 
     class YouModel(MPTree):
         name = models.CharField(max_length=200)
+
+
+.. code-block:: python
+    name = models.Tree.create(name="Name name")
+    sub = models.Tree.create(name="Name node2", parent=name)
+
+    # Get family
+    result = name.get_family()
+    print(result)
+
+

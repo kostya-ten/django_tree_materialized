@@ -33,7 +33,7 @@ If you want to install it from source, grab the git repository from GitHub and r
 
 Installation
 """"""""""""""""""
-To enable ``django_tasker_exchangerate`` in your project you need to add it to `INSTALLED_APPS` in your projects ``settings.py``
+To enable ``django_tree_materialized`` in your project you need to add it to `INSTALLED_APPS` in your projects ``settings.py``
 
 .. code-block:: python
 

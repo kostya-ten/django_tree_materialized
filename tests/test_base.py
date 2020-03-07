@@ -1,4 +1,3 @@
-from django.conf import settings
 from django.test import TestCase
 
 from django_tree_materialized.exceptions import InvalidMove
@@ -67,9 +66,9 @@ class Tests(TestCase):
         tree_sub1 = models.Tree.create(name="Name node2", parent=tree)
         tree_sub2 = models.Tree.create(name="Name node3", parent=tree_sub1)
 
-        tree_move = models.Tree.create(name="Name node move")
+        models.Tree.create(name="Name node move")
 
-        with self.assertRaises(InvalidMove) as context:
+        with self.assertRaises(InvalidMove):
             tree.move(tree_sub2)
 
     def test_move(self):

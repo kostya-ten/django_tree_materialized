@@ -82,9 +82,11 @@ class Tests(TestCase):
         res_tree = result.filter(name="Name node1").get()
         self.assertEqual(res_tree.path, '000001')
         self.assertEqual(res_tree.level, 1)
+        self.assertIsNone(res_tree.parent)
         self.assertEqual(res_tree.name, "Name node1")
 
         res_tree = result.filter(name="Name node2").get()
         self.assertEqual(res_tree.path, '000001000002')
         self.assertEqual(res_tree.level, 2)
+        self.assertIsNotNone(res_tree.parent)
         self.assertEqual(res_tree.name, "Name node2")

@@ -64,6 +64,7 @@ Add to your ``models.py``
 Create node or create child node
 
 .. code-block:: python
+
     name = models.Tree.create(name="Name name")
     sub = models.Tree.create(name="Name node2", parent=name)
 

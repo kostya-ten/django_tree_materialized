@@ -27,7 +27,7 @@ class Validators(TestCase):
         tree_sub = models.Tree.create(name="Name node", parent=tree)
 
         self.assertEqual(tree_sub.level, 2)
-        self.assertEqual(tree.path, "000002")
+        self.assertEqual(tree_sub.path, "000001000002")
 
     def test_get_family(self):
         tree = models.Tree.create(name="Name node1")

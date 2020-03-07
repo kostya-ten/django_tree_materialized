@@ -22,7 +22,7 @@ Getting It
 """"""""""""""""""
 You can get Django tree materialized by using pip::
 
-    $ pip install pip install django-tree-materialized
+    $ pip install django-tree-materialized
 
 If you want to install it from source, grab the git repository from GitHub and run setup.py::
 

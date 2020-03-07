@@ -13,6 +13,11 @@ Materialized tree for Django 3.x
      :target: https://www.codacy.com/manual/kostya/django_tree_materialized?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=kostya-ten/django_tree_materialized&amp;utm_campaign=Badge_Grade
      :alt: Codacy grade
 
+.. image:: https://badge.fury.io/py/django-tree-materialized.svg
+     :target: https://badge.fury.io/py/django-tree-materialized
+     :alt: pypi
+
+
 Requirements
 """"""""""""""""""
 * Python 3.6+
@@ -32,7 +37,7 @@ If you want to install it from source, grab the git repository from GitHub and r
 
 
 Installation
-""""""""""""""""""
+"""""""""""""
 To enable ``django_tree_materialized`` in your project you need to add it to `INSTALLED_APPS` in your projects ``settings.py``
 
 .. code-block:: python
@@ -44,3 +49,13 @@ To enable ``django_tree_materialized`` in your project you need to add it to `IN
     )
 
 
+Use
+"""""
+Add to your ``models.py``
+
+.. code-block:: python
+
+    from django_tree_materialized.models import MPTree
+
+    class YouModel(MPTree):
+        name = models.CharField(max_length=200)

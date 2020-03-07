@@ -44,18 +44,9 @@ jobs:
       - name: Testing with Django
         run: |
           python manage.py test
-  coverage:
-    name: "Code quality and testing"
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@master
-      - uses: codecov/codecov-action@v1
-      with:
-        token: ${{ secrets.CODECOV_TOKEN }}
   build:
     name: "Build and publish"
-    needs: coverage
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

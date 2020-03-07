@@ -44,9 +44,19 @@ jobs:
       - name: Testing with Django
         run: |
           python manage.py test
+  coverage:
+    name: "Code quality and testing"
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Code quality and testing
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        run: |
+          bash <(curl -s https://codecov.io/bash)
   build:
     name: "Build and publish"
-    needs: test
+    needs: coverage
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

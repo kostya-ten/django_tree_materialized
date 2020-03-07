@@ -61,12 +61,12 @@ Add to your ``models.py``
         name = models.CharField(max_length=200)
 
 
-Create node or create child node
+Create a node or create a child node
 
 .. code-block:: python
 
-    name = models.Tree.create(name="Name name")
-    sub = models.Tree.create(name="Name node2", parent=name)
+    name = models.YouModel.create(name="Name name")
+    sub = models.YouModel.create(name="Name node2", parent=name)
 
     # Get family
     result = name.get_family()

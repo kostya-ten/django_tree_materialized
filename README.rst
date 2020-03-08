@@ -76,7 +76,7 @@ Simple example
 
 
 Method
-======
+""""""
 
 get_family() - Get a list of parents
 

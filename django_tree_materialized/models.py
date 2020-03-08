@@ -47,10 +47,6 @@ class MPTree(models.Model):
         obj.save()
         return obj
 
-    @classmethod
-    def delete(cls, obj: int) -> None:
-        cls.objects.filter(id=obj).delete()
-
     def get_family(self, include_self: bool = True) -> models.QuerySet:
         """
             Getting a family list

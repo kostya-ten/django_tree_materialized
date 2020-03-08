@@ -16,7 +16,7 @@ with io.open("README.rst", encoding="UTF-8") as readme:
 
 setup(
     name='django-tree-materialized',
-    version='0.0.1',
+    version='0.0.2',
     packages=find_packages(),
     include_package_data=True,
     license='Apache License 2.0',
@@ -43,7 +43,7 @@ setup(
         'License :: OSI Approved :: Apache Software License',
     ],
     project_urls={
-        'Documentation': 'https://django-tree-materialized.readthedocs.io/',
+        'Documentation': 'https://github.com/kostya-ten/django_tree_materialized/',
         'Source': 'https://github.com/kostya-ten/django_tree_materialized/',
         'Tracker': 'https://github.com/kostya-ten/django_tree_materialized/issues/',
     },

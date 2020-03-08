@@ -61,15 +61,37 @@ Add to your ``models.py``
         name = models.CharField(max_length=200)
 
 
-Create a node or create a child node
+
+Simple example
 
 .. code-block:: python
 
     name = models.YouModel.create(name="Name name")
     sub = models.YouModel.create(name="Name node2", parent=name)
 
-    # Get family
-    result = name.get_family()
-    print(result)
+    # Get a list of parents
+    result = name.get_family() # Return QuerySet object
+    for item in result:
+        print(item.id, item.name, item.level, item.path, item.parent)
 
 
+Method
+======
+
+get_family() - Get a list of parents
+
+get_parent() - Return parent
+
+get_root() - Return root object
+
+move() - Moves one node to another
+
+
+**Move**
+
+.. code-block:: python
+
+    name = models.YouModel.create(name="Name name")
+    new_name = models.YouModel.create(name="Name node2")
+
+    result = name.move(new_name) # Return QuerySet new_name object

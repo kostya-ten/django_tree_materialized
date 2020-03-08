@@ -45,7 +45,7 @@ jobs:
         run: |
           python manage.py test
   coverage:
-    name: "Build and publish"
+    name: "Coverage"
     needs: test
     runs-on: ubuntu-latest
     steps:

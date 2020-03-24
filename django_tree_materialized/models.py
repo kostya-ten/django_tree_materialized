@@ -112,3 +112,6 @@ class MPTree(models.Model):
             self.save()
 
         return obj
+
+    class Meta:
+        abstract = True

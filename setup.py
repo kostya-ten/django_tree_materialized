@@ -16,7 +16,7 @@ with io.open("README.rst", encoding="UTF-8") as readme:
 
 setup(
     name='django-tree-materialized',
-    version='0.0.3',
+    version='0.0.4',
     packages=find_packages(),
     include_package_data=True,
     license='Apache License 2.0',
@@ -45,6 +45,7 @@ setup(
         'Documentation': 'https://github.com/kostya-ten/django_tree_materialized/',
         'Source': 'https://github.com/kostya-ten/django_tree_materialized/',
         'Tracker': 'https://github.com/kostya-ten/django_tree_materialized/issues/',
+        'Funding': 'https://www.paypal.me/kostyaten/',
     },
     python_requires='~=3.6',
     install_requires=required,

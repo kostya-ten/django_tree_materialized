@@ -6,7 +6,7 @@ from . import exceptions
 
 
 class MPTree(models.Model):
-    parent = models.ForeignKey('self', null=True, on_delete=models.CASCADE)
+    parent = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE)
     level = models.IntegerField(null=True)
     path = models.CharField(null=True, max_length=1024)
 

@@ -55,7 +55,7 @@ class MPTree(models.Model):
 
         sql = []
         for item in [self.path[i:i + mp_tree_steplen] for i in range(0, len(self.path), mp_tree_steplen)]:
-            id_obj = int(item)
+            id_obj = int(self.str_to_number(item))
             if include_self:
                 sql.append(id_obj)
             else:
@@ -84,7 +84,7 @@ class MPTree(models.Model):
 
         sql = []
         for item in [self.path[i:i + mp_tree_steplen] for i in range(0, len(self.path), mp_tree_steplen)]:
-            sql.append(int(item))
+            sql.append(int(self.str_to_number(item)))
 
         return self.__class__.objects.filter(id__in=sql, level=1)[:1].get()
 

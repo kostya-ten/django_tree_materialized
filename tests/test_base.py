@@ -12,6 +12,9 @@ class Tests(TestCase):
         result = models.Tree.number_to_str(100)
         self.assertEqual(result, "00002s")
 
+        result = models.Tree.number_to_str(43)
+        print(result)
+
     def test_str_to_number(self):
         result = models.Tree.str_to_number("000001")
         self.assertEqual(result, 1)
